@@ -15,11 +15,11 @@
             v-for="pageNumber in totalPages" :key="pageNumber"
             class="page"
             :class="{'current-page': page === pageNumber}"
-            @click="changePage(pageNumber)"
+            @click="changePage(pageNumber);changeRoute(pageNumber)"
         >
-          <router-link class="page-link" :to="{ name: 'HomeId', params: { id: pageNumber  }}">{{ pageNumber }}</router-link>
+          <!--<router-link class="page-link" :to="{ name: 'HomeId', params: { id: pageNumber  }}">{{ pageNumber }}</router-link> -->
+          {{ pageNumber }}
         </div>
-
       </div>
     </div>
   </div>
@@ -45,6 +45,9 @@ export default {
     changePage(pageNumber){
       this.page = pageNumber;
     },
+    changeRoute(pageLink) {
+      this.$router.push({ name: 'HomeId', params: { id: pageLink } });
+    },
     async fetchNews(){
       try{
         this.isNewsLoading = true;
@@ -64,11 +67,11 @@ export default {
     }
   },
   mounted() {
-    this.fetchNews()
+    this.fetchNews();
   },
   watch: {
     page() {
-      this.fetchNews()
+      this.fetchNews();
     },
   }
 
