@@ -1,10 +1,27 @@
 <template>
-  <div id="nav">
+  <div id="nav" >
     <router-link to="/">Home</router-link> |
-    <router-link to="/news">News</router-link>
+    <!--<router-link to="/news">News</router-link> -->
+    <router-link :to="'/news/' + id">News</router-link>
   </div>
-  <router-view/>
+  <router-view v-on:set-id="getid" />
 </template>
+
+<script>
+export default {
+  name: "App",
+  data() {
+    return {
+      id: 1
+    }
+  },
+  methods: {
+    getid(idn) {
+      this.id = idn;
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 #app {

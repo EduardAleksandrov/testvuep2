@@ -15,7 +15,7 @@
             v-for="pageNumber in totalPages" :key="pageNumber"
             class="page"
             :class="{'current-page': page === pageNumber}"
-            @click="changePage(pageNumber);changeRoute(pageNumber)"
+            @click="changePage(pageNumber);changeRoute(pageNumber);changePageId(pageNumber);"
         >
           <!--<router-link class="page-link" :to="{ name: 'HomeId', params: { id: pageNumber  }}">{{ pageNumber }}</router-link> -->
           {{ pageNumber }}
@@ -47,6 +47,9 @@ export default {
     },
     changeRoute(pageLink) {
       this.$router.push({ name: 'HomeId', params: { id: pageLink } });
+    },
+    changePageId(pageNumber) {
+      this.$emit('set-id',pageNumber);
     },
     async fetchNews(){
       try{
